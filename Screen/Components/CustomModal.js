@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState,useCallback} from 'react';
 
 import {Modal, Text, View,TextInput, TouchableOpacity} from 'react-native';
 import { COLORS } from '../Constant/Color';
@@ -12,18 +12,17 @@ export default function CustomModal({
 }) {
 
     const [reminderValue,setReminderValue]=useState({reminder:'',description:'',datetime:''})
+    const [reminderInput,setReminderInput]=useState('');
+    const [descriptionInput,setDescriptionInput]=useState('');
 
-  const  handleChange = (evt) => {
-    const value = evt.target.value;
-    setReminderValue({
-      [evt.target.name]: value
-    });
-  }
+ 
+  useEffect(() =>{
+    console.log("aamir -----",reminderInput);
+  })
 
-  function onModalClose(event) {
-    let data={...reminderValue};
-    console.log("muskanaamir",reminderValue.reminder);
-    onCloseModal(event, reminderValue);
+  const onModalClose = (event) => {
+    let data={title:reminderInput,reminderText:descriptionInput};
+    onCloseModal(event, data);
   }
 
   return (
@@ -53,20 +52,23 @@ export default function CustomModal({
              <Text style={{color:COLORS.black}} >Reminder Name</Text>
               <TextInput  
                 
-                value={reminderValue?.reminder}
+                value={reminderInput}
                 placeholder="Please Enter Reminder Name"
                 placeholderTextColor="#8b9cb5"
-                 name='reminder'
-               onChange={handleChange}
+               onChangeText={(value) => {
+  setReminderInput(value)
+}}
               />
                <Text style={{color:COLORS.black}} >Reminder Description</Text>
               <TextInput
                
-               value={reminderValue?.description}
+               value={descriptionInput}
                 placeholder="Please Enter Reminder Description"
                 placeholderTextColor="#8b9cb5"
                 name='description'
-                onChange={handleChange}
+                onChangeText={(value) => {
+  setDescriptionInput(value)
+}}
               />
              
               <View style={{flexDirection:'row',width:'100%',alignItems:'center',justifyContent:'center'}} >

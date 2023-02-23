@@ -78,7 +78,6 @@ const HomeScreen = () => {
 
   const handleSave = (reminderValue) =>{
     handleModal()
-   
     let reminderList = [...userList];
     reminderList.push({
       title: reminderValue.reminder,
@@ -91,23 +90,12 @@ const HomeScreen = () => {
 
   function handleCloseModal(event, data) {
     handleModal();
-    console.log("muskan",data);
-  }
-  const AddData = useCallback(() => {
+    console.log("aamir",data);
     let reminderList = [...userList];
-    reminderList.push({
-      title: 'Reminder 3',
-      id: 3,
-      reminderText:
-        'This is the Third reminder that the alaram is ring in the first half',
-    });
+    reminderList.push(data);
     setUserList(reminderList);
-  }, []);
-
-  useEffect(() => {
-   
-  }, []);
-
+  }
+  
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{flex: 1, padding: 16}}>
